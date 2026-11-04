@@ -63,8 +63,9 @@
     for (let i = 0; made < +booking.dataset.days && i < 21; i++) {
       const d = new Date(today); d.setDate(today.getDate() + i);
       if (closed.includes(d.getDay())) continue;
-      const label = i === 0 ? "Сегодня" : i === 1 ? "Завтра" : wd[d.getDay()] + ", " + d.getDate() + " " + mon[d.getMonth()];
-      const full = (i < 2 ? label.toLowerCase() + ", " : "") + wd[d.getDay()] + " " + d.getDate() + " " + mon[d.getMonth()];
+      const wdFull = ["Воскресенье", "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"], wdAcc = ["в воскресенье", "в понедельник", "во вторник", "в среду", "в четверг", "в пятницу", "в субботу"];
+      const label = i === 0 ? "Сегодня" : i === 1 ? "Завтра" : wdFull[d.getDay()];
+      const full = i < 2 ? label.toLowerCase() : wdAcc[d.getDay()];
       daysBox.insertAdjacentHTML("beforeend", `<label class="s-chip"><input type="radio" name="day" value="${made}" data-full="${full}"${made === 0 ? " checked" : ""}><span>${label}</span></label>`);
       made++;
     }
